@@ -4,7 +4,6 @@ import { useLocation } from 'react-router-dom';
 const Pokedex = () => {
     const location = useLocation();
     const data = location.state?.poke;
-    console.log("location: ", location, "data", data)
 
     if (!data){
         return             (<div className="spinner-grow" role="status">
