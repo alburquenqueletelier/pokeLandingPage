@@ -1,14 +1,11 @@
 import React from "react";
-import { Button } from 'react-bootstrap';
+import { Link } from "react-router-dom";
 
 const Home = () => {
 
     return (
-        <div className="container">
-            <button className="btn btn-danger">ASDSA</button>
-            <Button variant="outline-danger">
-                START!
-            </Button>
+        <div className="d-flex justify-content-center align-items-center">
+            <Link to={"/pokegrid"} className="btn btn-danger">ASDSA</Link>
         </div>
     );
 };
