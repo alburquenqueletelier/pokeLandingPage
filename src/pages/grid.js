@@ -71,29 +71,45 @@ const Grid = () => {
         }
     }, []);
 
+    // useEffect(()=>{
+
+    // }, [pokeList])
+
+    const handleSearch = (event) => {
+        event.preventDefault();
+        console.log(event.target);
+    };
 
     return(
-        <div className="row">
-            {pokeInfo? pokeInfo.map((poke, index) => {
-                return(
-                    <div className="col-auto" key={index}>
-                        <Link to={`/pokedex/${poke.name}`} state={{poke}}>
-                            <CardGrid 
-                                id={poke.id}
-                                name={poke.name}
-                                description={poke.description}
-                                image={poke.image}
-                            />
-                        </Link>
-                    </div>
-                );
-            })
-            :
-            <div className="spinner-grow" role="status">
-                <span className="visually-hidden">Loading...</span>
+        <div>
+            <form className="pt-2 ">
+                <div className="d-flex">
+                    <label htmlFor="search" className="form-label">Search by Name</label>
+                    <input type="text" name="search" className="form-control w-50" placeholder="e.g Pikachu" onChange={handleSearch}/>
+                </div>
+            </form>
+            <div className="row">
+                {pokeInfo? pokeInfo.map((poke, index) => {
+                    return(
+                        <div className="col-auto" key={index}>
+                            <Link to={`/pokedex/${poke.name}`} state={{poke}}>
+                                <CardGrid 
+                                    id={poke.id}
+                                    name={poke.name}
+                                    description={poke.description}
+                                    image={poke.image}
+                                />
+                            </Link>
+                        </div>
+                    );
+                })
+                :
+                <div className="spinner-grow" role="status">
+                    <span className="visually-hidden">Loading...</span>
+                </div>
+                }
+                <button onClick={next}>prueba</button>
             </div>
-            }
-            <button onClick={next}>prueba</button>
         </div>
         
     )
