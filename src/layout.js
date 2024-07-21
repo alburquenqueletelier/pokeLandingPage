@@ -1,9 +1,11 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import injectContext from "./store/appContext";
+
 import Home from "./pages/home.js";
 import Grid from "./pages/grid.js";
 import Pokedex from "./pages/pokedex.js";
 
-function App() {
+function Layout() {
   return (
 
     <div className="container">
@@ -18,4 +20,4 @@ function App() {
   );
 }
 
-export default App;
+export default injectContext(Layout);
