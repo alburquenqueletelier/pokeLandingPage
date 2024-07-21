@@ -6,12 +6,11 @@ import BackButton from "../components/backButton";
 const Pokedex = () => {
 
     const {store} = useContext(Context);
-    const {pokeInfo} = store;
     const {poke} = useParams();
     const [pokeToRender, setPokeToRender] = useState();
 
     useEffect(()=>{
-        setPokeToRender(pokeInfo.filter(dataPoke => dataPoke.name === poke)[0]);
+        setPokeToRender(store.pokeInfo.filter(dataPoke => dataPoke.name === poke)[0]);
         return () => {
             console.log('Cleanup ran');
         };
@@ -47,8 +46,8 @@ const Pokedex = () => {
                                     })
                                 }
                             </div>
-                            <p>H: {pokeToRender.height}</p>
-                            <p>W: {pokeToRender.weight}</p>
+                            <p>HT: {pokeToRender.height}</p>
+                            <p>WT: {pokeToRender.weight}</p>
                             <p>{pokeToRender.description}</p>
                         </div>
                     </div>
