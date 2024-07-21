@@ -63,13 +63,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			addOrRemove: (poke)=>{
 				let {favs} = getStore();
-				if (favs.includes(poke)){
-					favs = favs.filter(pokemon => pokemon !== poke);
+				if (favs.filter(data => data.name === poke.name).length > 0){
+					favs = favs.filter(data => data.name !== poke.name);
 				} else {
 					favs.push(poke);
 				};
-				setStore({favs: favs});
 				localStorage.setItem('favs', JSON.stringify(favs));
+				setStore({favs: favs});
 			},
 			setPage: (value) => {
 				setStore({page: value});
