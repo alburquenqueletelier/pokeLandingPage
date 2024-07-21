@@ -1,3 +1,4 @@
+
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
@@ -30,7 +31,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 					fetch(`https://pokeapi.co/api/v2/pokemon/${poke}`)
 					.then(response => response.json())
 					.then(pokeFetched=>{
-						fetch(`https://pokeapi.co/api/v2/pokemon-species/${pokeFetched.id}`)
+						let splitUrl = pokeFetched.species.url.split("/");
+    					let speciesId = splitUrl[splitUrl.length -2]
+						fetch(`https://pokeapi.co/api/v2/pokemon-species/${speciesId}`)
 						.then(response => response.json())
 						.then(speciesInfo => {
 							let info = {
