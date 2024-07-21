@@ -1,15 +1,17 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-const CardGrid = (props) => {
+const CardGrid = ({name, image, getPokeInfo}) => {
 
     return(
-        <div className="card" style={{width: "18rem"}}>
-            <h5 className="card-header">#{props.id} {props.name}</h5>
-            <img src={props.image} className="card-img-top" alt="..."/>
-            <div className="card-body">
-                <p className="card-text">{props.description}</p>
+        <Link to={`/pokedex/${name}`} onClick={() => getPokeInfo(name)}>
+            <div className="card" style={{width: "18rem"}}>
+                <h5 className="card-header">{name}</h5>
+                <img src={image} className="card-img-top" alt={name}/>
+                <div className="card-body">
+                </div>
             </div>
-        </div>
+        </Link>
     )
 };
 
