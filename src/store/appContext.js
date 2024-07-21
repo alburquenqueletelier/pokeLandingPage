@@ -22,6 +22,8 @@ const injectContext = PassedComponent => {
 			? state.actions.loadInfo("pokeNames")
 			: state.actions.getPokeNames();
 
+			localStorage.getItem("pokeInfo") && state.actions.loadInfo("pokeInfo")
+
 			localStorage.getItem("favs") && state.actions.loadInfo("favs");
 		}, []);
 
