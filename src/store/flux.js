@@ -5,9 +5,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			pokeNames: [],
 			pokeInfo: [],
 			page: 1,
-			favs:{
-				pokeNames:[],
-			},
+			favs:[],
+			showFavs: false,
 			search: "",
 		},
 		actions: {
@@ -59,11 +58,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 			loadInfo: (type)=>{
 				const data = JSON.parse(localStorage.getItem(type));
 				if (type === 'pokeNames') setStore({pokeNames: data});
-				if (type === 'pokeInfo') setStore({pokeInfo: data})
+				if (type === 'pokeInfo') setStore({pokeInfo: data});
 				if (type === 'favs') setStore({favs: data});
 			},
 			addOrRemove: (poke)=>{
-				const {favs} = getStore();
+				let {favs} = getStore();
 				if (favs.includes(poke)){
 					favs = favs.filter(pokemon => pokemon !== poke);
 				} else {
@@ -78,6 +77,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 			setSearch: (value) =>{
 				setStore({search: value});
 			},
+			setShowFavs: () => {
+				setStore({showFavs: !getStore().showFavs});
+			}
 		}
 	};
 };
