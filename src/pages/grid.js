@@ -1,117 +1,48 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useContext, useEffect } from "react";
+import { Context } from "../store/appContext";
+import getImageByUrl from "../utils/utils";
+import PokePagination from "../components/pagination";
 import CardGrid from "../components/cardGrid";
-import { Link } from "react-router-dom";
 
 const Grid = () => {
 
-    const [pokeList, setPokeList] = useState({});
-    const [pokeInfo, setPokeInfo] = useState([]);
+    const { store, actions } = useContext(Context);
+    const currentPage = store.page;
 
-    const fechData = async (url) => {
-        const response = await fetch(url);
-        const data = await response.json();
-        return data
-    };
-
-    const next = () => {
-        fetch(pokeList.next)
-        .then(response => response.json())
-        .then(data => setPokeList(data))
-    };
-
-    const previous = () => {
-        fetch(pokeList.previous)
-        .then(response => response.json())
-        .then(data => setPokeList(data))
-    };
-
-    useEffect(()=>{
-        
-        const loadList = async (url) => {
-            const data = await fechData(url)
-            setPokeList(data);
-            console.log(pokeList);
-        };
-
-        const loadPokeInfo = async (url) => {
-            const data = await fechData(url)
-            return data
-        }
-        
-        if (sessionStorage.getItem("data")){
-            setPokeList(JSON.parse(sessionStorage.getItem("data")));
-        } else {
-            loadList("https://pokeapi.co/api/v2/pokemon?limit=6&offset=6");
-            sessionStorage.setItem("data", JSON.stringify(pokeList));
-        };
-
-        if (sessionStorage.getItem("dataPoke")){
-            setPokeInfo(JSON.parse(sessionStorage.getItem("dataPoke")));
-        } else {
-            pokeList?.results.forEach(async poke => {
-                const data = await loadPokeInfo(poke.url);
-                const description = await loadPokeInfo(data.species.url)
-                const info = {
-                    id: data.id,
-                    name: data.name,
-                    description: description.flavor_text_entries?.filter(text => text.language === "en")[0]?.flavor_text,
-                    height: data.height,
-                    weight: data.weight,
-                    types: data.types.map(element => {
-                        return element.type.name
-                    }),
-                    image: data.sprites.other["official-artwork"]
-                            ? data.sprites.other["official-artwork"]["front_default"]
-                            : data.sprites.front_default
-                };
-                console.log(info);
-                setPokeInfo((pokeInfo) => [...pokeInfo, info]);
-            });
-        }
-    }, []);
-
-    // useEffect(()=>{
-
-    // }, [pokeList])
-
-    const handleSearch = (event) => {
-        event.preventDefault();
-        console.log(event.target);
-    };
-
-    return(
+    return (
         <div>
-            <form className="pt-2 ">
+            {/* <form className="pt-2 ">
                 <div className="d-flex">
                     <label htmlFor="search" className="form-label">Search by Name</label>
                     <input type="text" name="search" className="form-control w-50" placeholder="e.g Pikachu" onChange={handleSearch}/>
                 </div>
-            </form>
-            <div className="row">
-                {pokeInfo? pokeInfo.map((poke, index) => {
-                    return(
-                        <div className="col-auto" key={index}>
-                            <Link to={`/pokedex/${poke.name}`} state={{poke}}>
+            </form> */}
+            <div className="d-flex justify-content-center">
+                <PokePagination />
+            </div>
+                <div className="row justify-content-center">
+                    {store?.pokeNames && store.page
+                    ? store.pokeNames.slice((currentPage-1)*30, currentPage*30).map((poke, index)=>{
+                        return(
+                            <div className="col-4 col-md-auto" key={index}>
                                 <CardGrid 
-                                    id={poke.id}
                                     name={poke.name}
-                                    description={poke.description}
-                                    image={poke.image}
+                                    image={getImageByUrl(poke.url)}
+                                    getPokeInfo={actions.getPokeInfo}
                                 />
-                            </Link>
-                        </div>
-                    );
-                })
-                :
-                <div className="spinner-grow" role="status">
-                    <span className="visually-hidden">Loading...</span>
+                            </div>
+                        )
+                    })
+                    :<p>Cargando...</p>
+                    }
+                    
                 </div>
-                }
-                <button onClick={next}>prueba</button>
+            <div className="d-flex justify-content-center">
+                <PokePagination />
             </div>
         </div>
-        
+
     )
 };
 
