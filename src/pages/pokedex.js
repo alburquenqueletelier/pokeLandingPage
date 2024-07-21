@@ -1,36 +1,62 @@
-import React from "react";
-import { useLocation } from 'react-router-dom';
+import React, { useContext, useEffect, useState } from "react";
+import { useParams, useNavigate } from 'react-router-dom';
+import { Context } from "../store/appContext";
+import BackButton from "../components/backButton";
 
 const Pokedex = () => {
-    const location = useLocation();
-    const data = location.state?.poke;
 
-    if (!data){
-        return             (<div className="spinner-grow" role="status">
-        <span className="visually-hidden">Loading...</span>
-    </div>)
-    };
+    const {store} = useContext(Context);
+    const {pokeInfo} = store;
+    const {poke} = useParams();
+    const [pokeToRender, setPokeToRender] = useState();
+
+    useEffect(()=>{
+        setPokeToRender(pokeInfo.filter(dataPoke => dataPoke.name === poke)[0]);
+        return () => {
+            console.log('Cleanup ran');
+        };
+    },)
 
     return(
-        <div className="container">
-            <h1>Pokédex Information</h1>
-            <div className="row">
-                <div className="col-auto">
-                    <p>#{data.id} {data.name}</p>
-                    <img src={data.image} alt={data.name} className="card-img-top"/>
-                </div>
-                <div className="col-auto">
-                    <div className="d-block">
-                        <p>Tpyes: {data.type}</p>
-                        <p>Height: {data.height}</p>
-                        <p>Weight: {data.weight}</p>
+        
+        <div className="container border rounded border-secondary border-2 mt-1 px-1">
+            
+            <div className="d-flex">
+            <BackButton/>
+            <h1 className="m-auto">Pokédex Information</h1>
+
+            </div>
+                {
+                    pokeToRender 
+                    ?
+                    <div className="row">
+                        <div className="col-7 col-sm-3">
+                            <h5 className="text-center">#{pokeToRender.id} {pokeToRender.name}</h5>
+                            <img className="card-img-top" src={pokeToRender.image} alt={pokeToRender.name} />
+                            {/* <div className="col-9 col-sm-auto">
+                                <img className="card-img-top align-self-center" src={pokeToRender.image} alt={pokeToRender.name} />
+                            </div> */}
+                        </div>
+                        <div className="col-12 col-sm-9">
+                            <div className="d-flex">
+                                {
+                                    pokeToRender.types.map((type, index) => {
+                                        return (
+                                            <p key={index} className="border border-2 px-1 me-2 text-capitalize">{type}</p>
+                                        )
+                                    })
+                                }
+                            </div>
+                            <p>H: {pokeToRender.height}</p>
+                            <p>W: {pokeToRender.weight}</p>
+                            <p>{pokeToRender.description}</p>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div className="row">
-                <p>{data.description}</p>
-            </div>
+                    : <p>Cargando ...</p>
+
+                }        
         </div>
+        
     )
 };
 
