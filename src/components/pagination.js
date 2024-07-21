@@ -46,7 +46,7 @@ const PokePagination = () => {
             <Pagination.Prev onClick={()=>actions.setPage(store.page-1)} disabled={(store.page-1) <= 1}/>
             {renderPaginationItems()}
             <Pagination.Next onClick={()=>actions.setPage(store.page+1)} disabled={(store.page+1) >= store.pokeNames.lenght/30 | 0}/>
-            <Pagination.Last onClick={()=>actions.setPage(store.pokeNames.lenght/30 | 0)}/>
+            <Pagination.Last onClick={()=>actions.setPage(store.pokeNames.length/30 | 0)}/>
         </Pagination>
     )
 };
