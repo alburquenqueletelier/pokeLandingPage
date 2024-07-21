@@ -25,6 +25,7 @@ const injectContext = PassedComponent => {
 			localStorage.getItem("pokeInfo") && state.actions.loadInfo("pokeInfo")
 
 			localStorage.getItem("favs") && state.actions.loadInfo("favs");
+			console.log("pase or useefecct app context")
 		}, []);
 
 		return (
