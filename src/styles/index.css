@@ -5,15 +5,12 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: chocolate;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
-}
-
-#root {
-  background-color: chocolate;
 }
 
 .btn:hover {
@@ -22,4 +19,19 @@ code {
 
 .wallpaper {
   background-image: url(https://i.pinimg.com/originals/3c/a9/9a/3ca99aa52168e8680908bb4da67fcd11.jpg);
+}
+
+.fade-enter {
+  opacity: 0;
+}
+.fade-enter-active {
+  opacity: 1;
+  transition: opacity 300ms;
+}
+.fade-exit {
+  opacity: 1;
+}
+.fade-exit-active {
+  opacity: 0;
+  transition: opacity 300ms;
 }

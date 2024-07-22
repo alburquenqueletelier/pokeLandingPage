@@ -1,5 +1,6 @@
 import React from "react";
 import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
 import Pagination from 'react-bootstrap/Pagination';
 
@@ -7,7 +8,8 @@ const PokePagination = () => {
     const { store, actions } = useContext(Context);
     const totalPages = store.pokeNames.length / 30 | 0;
     const currentPage = store.page;
-
+    const navigate = useNavigate();
+    
     const renderPaginationItems = () => {
         const items = [];
         let startPage, endPage;
@@ -31,7 +33,10 @@ const PokePagination = () => {
                 <Pagination.Item
                     key={page}
                     active={page === currentPage}
-                    onClick={() => actions.setPage(page)}
+                    onClick={() => {
+                        actions.setPage(page)
+                        navigate(`/pokegrid/${page}`)
+                    }}
                 >
                     {page}
                 </Pagination.Item>

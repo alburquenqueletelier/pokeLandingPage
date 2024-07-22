@@ -73,6 +73,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			setPage: (value) => {
 				setStore({page: value});
+				localStorage.getItem("pokenames")
+				? getActions().loadInfo("pokeNames")
+				: getActions().getPokeNames();
 			},
 			setSearch: (value) =>{
 				setStore({search: value});

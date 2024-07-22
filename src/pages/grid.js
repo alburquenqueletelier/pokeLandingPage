@@ -1,5 +1,6 @@
 import React from "react";
 import { useContext, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
 import getImageByUrl from "../utils/utils";
 import PokePagination from "../components/pagination";
@@ -11,6 +12,16 @@ import Spinner from 'react-bootstrap/Spinner';
 const Grid = () => {
 
     const { store, actions } = useContext(Context);
+    const { page } = useParams();
+    
+    useEffect(() => {
+        if (page) {
+            actions.setPage(Number(page));
+        } else {
+            actions.setPage(1);
+        }
+    }, [page, store.page]);
+    
     const currentPage = store.page;
 
     const handleClick = (e) => {
