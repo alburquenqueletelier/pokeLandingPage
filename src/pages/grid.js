@@ -49,7 +49,7 @@ const Grid = () => {
                                 !store.showFavs && store?.pokeNames
                                     ? store.pokeNames.slice((currentPage - 1) * 30, currentPage * 30).map((poke, index) => {
                                         return (
-                                            <div className="col-4 col-md-auto" key={index}>
+                                            <div className="col-auto col-sm-auto" key={index}>
                                                 <CardGrid
                                                     name={poke.name}
                                                     image={getImageByUrl(poke.url)}
@@ -63,7 +63,7 @@ const Grid = () => {
                                         ?
                                         store.favs.length > 0 ? store.favs.map((poke, index) => {
                                             return (
-                                                <div className="col-4 col-md-auto" key={index}>
+                                                <div className="col-auto col-sm-auto" key={index}>
                                                     <CardGrid
                                                         name={poke.name}
                                                         image={getImageByUrl(poke.url)}
