@@ -10,13 +10,16 @@ const SearchForm = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
         const text = event.target.search.value;
-        store.pokeNames.forEach(poke => {
+        if (text === null || text === undefined || text.trim() === '') return alert("You must enter a pokemon name");
+        const pokeMatch = store.pokeNames.some(poke => {
             if (poke.name.toLowerCase() === text.toLowerCase()) {
                 actions.getPokeInfo(text);
                 navigate(`/pokedex/${text}`);
+                return true;
             }
+            return false;
         })
-        return 0;
+        return !pokeMatch && alert(`There isn't a pokemon with the name: ${text}`);
     };
 
     return (
@@ -33,6 +36,11 @@ const SearchForm = () => {
                         : <p>Cargando ...</p>
                     }
                 </datalist>
+                <button type="submit" className="btn btn-secondary favs">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+  <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+</svg>
+                </button>
             </div>
         </form>
     );

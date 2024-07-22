@@ -10,6 +10,11 @@ const CardGrid = ({name, image, getPokeInfo}) => {
         setLoadingImg(false);
     };
 
+    const handleError = (image) => {
+        setLoadingImg(false);
+        console.log("There is an issue with the image: ", image);
+    };
+
     return(
         <div>
             {
@@ -18,7 +23,7 @@ const CardGrid = ({name, image, getPokeInfo}) => {
             <Link to={`/pokedex/${name}`} onClick={() => getPokeInfo(name)} style={{display: loadingImg ? "none" : "block"}}>
                 <div className="card" style={{width: "18rem"}}>
                     <h5 className="card-header">{name}</h5>
-                    <img src={image} className="card-img-top" alt={name} onLoad={handleLoad}/>
+                    <img src={image} className="card-img-top" alt={name} onLoad={handleLoad} onError={()=>handleError(image)}/>
                     <div className="card-body">
                     </div>
                 </div>

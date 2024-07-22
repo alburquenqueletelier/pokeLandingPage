@@ -5,7 +5,7 @@ const BackButton = () => {
     const navigate = useNavigate();
 
     return(
-        <button className="mt-1 ms-1" onClick={() => navigate(-1)}>
+        <button className="mt-1 ms-1 btn btn-secondary favs" onClick={() => navigate(-1)}>
             Return!
         </button>
     )

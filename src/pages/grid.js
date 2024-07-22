@@ -7,6 +7,7 @@ import PokePagination from "../components/pagination";
 import CardGrid from "../components/cardGrid";
 import SearchForm from "../components/searchForm";
 import FavButton from "../components/favButton";
+import HomeLink from "../components/homeLink";
 import Spinner from 'react-bootstrap/Spinner';
 
 const Grid = () => {
@@ -35,12 +36,13 @@ const Grid = () => {
                 store
                 ? (
                     <div>
+                        <HomeLink />
                         <div className="d-flex justify-content-center">
                             <PokePagination />
                         </div>
                         <div className="d-flex justify-content-center pb-1">
                             <SearchForm />
-                            <button onClick={handleClick}>Filter by Favorites</button>
+                            <button onClick={handleClick} className={store.showFavs ? "btn btn-danger" : "btn btn-primary"}>{store.showFavs ? "Remove Filter" : "Filter by Favorites"}</button>
                         </div>
                         <div className="row justify-content-center">
                             {
