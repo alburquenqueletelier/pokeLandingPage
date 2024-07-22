@@ -73,7 +73,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			setPage: (value) => {
 				setStore({page: value});
-				localStorage.getItem("pokenames")
+				localStorage.getItem("pokeNames")
 				? getActions().loadInfo("pokeNames")
 				: getActions().getPokeNames();
 			},
