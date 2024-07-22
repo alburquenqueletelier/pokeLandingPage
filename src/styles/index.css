@@ -13,8 +13,13 @@ code {
     monospace;
 }
 
-.btn:hover {
-  transform: scale(1.5);
+.favs:hover {
+  transform: scale(1.1);
+  text-decoration: solid;
+}
+
+.card:hover {
+  transform: scale(1.01);
 }
 
 .wallpaper {
@@ -34,4 +39,9 @@ code {
 .fade-exit-active {
   opacity: 0;
   transition: opacity 300ms;
+}
+
+#startHomeButton:hover {
+  transform: scale(1.3);
+  text-decoration: solid;
 }

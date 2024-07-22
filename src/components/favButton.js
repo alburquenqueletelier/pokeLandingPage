@@ -11,10 +11,10 @@ const FavButton = ({poke}) => {
     };
 
     return(
-        <button className={isInFav(poke) ? "btn btn-danger" : "btn btn-primary"} onClick={() => actions.addOrRemove(poke)}>
+        <button className={isInFav(poke) ? "btn btn-danger favs" : "btn btn-primary favs"} onClick={() => actions.addOrRemove(poke)}>
             {isInFav(poke)
-            ? <span>Remove</span>
-            : <span>Add</span>
+            ? <span>Remove from Favorites</span>
+            : <span>Add to Favorites</span>
             }
         </button>
     );

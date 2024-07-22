@@ -45,13 +45,18 @@ const PokePagination = () => {
         return items;
     };
 
+    const handlePage = (page) => {
+        actions.setPage(page);
+        navigate(`/pokegrid/${page}`)
+    };
+
     return (
         <Pagination>
-            <Pagination.First onClick={()=>actions.setPage(1)} />
-            <Pagination.Prev onClick={()=>actions.setPage(store.page-1)} disabled={(store.page-1) <= 1}/>
+            <Pagination.First onClick={()=>handlePage(1)} />
+            <Pagination.Prev onClick={()=>handlePage(store.page-1)} disabled={(store.page-1) <= 1}/>
             {renderPaginationItems()}
-            <Pagination.Next onClick={()=>actions.setPage(store.page+1)} disabled={(store.page+1) >= store.pokeNames.lenght/30 | 0}/>
-            <Pagination.Last onClick={()=>actions.setPage(store.pokeNames.length/30 | 0)}/>
+            <Pagination.Next onClick={()=>handlePage(store.page+1)} disabled={(store.page+1) >= store.pokeNames.lenght/30 | 0}/>
+            <Pagination.Last onClick={()=>handlePage(store.pokeNames.length/30 | 0)}/>
         </Pagination>
     )
 };
