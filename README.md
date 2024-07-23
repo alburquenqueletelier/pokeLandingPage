@@ -1,6 +1,17 @@
 # Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+`npm install` for install all dependencies
+
+The project uses the following added libraries: 
+- React Router Dom
+- Bootstrap
+- React Bootstrap
+
+In case you have problem with this you can consult the docs of each one to install them correctly. 
+
+Also, the project use Flux Architecture to manage the data flow. See this in store folder.
+
+This project consume the [API Poke](https://pokeapi.co/).
 
 ## Available Scripts
 
