@@ -48,6 +48,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 							};
 							pokeInfo.push(info);
 							setStore({pokeInfo: pokeInfo});
+							localStorage.setItem("pokeInfo", JSON.stringify(pokeInfo));
 							console.log("getPokeInfo success");
 						})
 						.catch(error => console.log(error))

@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
 
 const SearchForm = () => {
-    const { store, actions } = useContext(Context);
+    const { store } = useContext(Context);
     const navigate = useNavigate();
     
     const handleSubmit = (event) => {
@@ -13,7 +13,6 @@ const SearchForm = () => {
         if (text === null || text === undefined || text.trim() === '') return alert("You must enter a pokemon name");
         const pokeMatch = store.pokeNames.some(poke => {
             if (poke.name.toLowerCase() === text.toLowerCase()) {
-                actions.getPokeInfo(text);
                 navigate(`/pokedex/${text}`);
                 return true;
             }

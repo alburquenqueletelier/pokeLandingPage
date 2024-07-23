@@ -53,7 +53,6 @@ const Grid = () => {
                                                 <CardGrid
                                                     name={poke.name}
                                                     image={getImageByUrl(poke.url)}
-                                                    getPokeInfo={actions.getPokeInfo}
                                                 />
                                                 <FavButton key={index} poke={poke} />
                                             </div>
@@ -67,7 +66,6 @@ const Grid = () => {
                                                     <CardGrid
                                                         name={poke.name}
                                                         image={getImageByUrl(poke.url)}
-                                                        getPokeInfo={actions.getPokeInfo}
                                                     />
                                                     <FavButton key={index} poke={poke} />
                                                 </div>
