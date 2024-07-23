@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { Context } from "../store/appContext";
 import BackButton from "../components/backButton";
 import Spinner from "react-bootstrap/esm/Spinner";
+import FavButton from "../components/favButton";
 
 const Pokedex = () => {
 
@@ -15,6 +16,11 @@ const Pokedex = () => {
         setLoadingImg(false);
     };
 
+    const handleError = (image) => {
+        setLoadingImg(false);
+        console.log("There is an issue with the image: ", image);
+    };
+
     useEffect(()=>{
         setPokeToRender(store.pokeInfo.filter(dataPoke => dataPoke.name === poke)[0]);
         return () => {
@@ -25,8 +31,10 @@ const Pokedex = () => {
     return(
         
         <div className="container border rounded border-secondary border-2 mt-1 px-1" >
-            
-            <div className="d-flex">
+            {
+                loadingImg && <Spinner animation="border" role="status"><span className="visually-hidden">Loading...</span></Spinner>
+            }
+            <div className={loadingImg ? "d-none" : "d-flex"}>
             <BackButton/>
             <h1 className="m-auto text-decoration-underline">Pokédex Information</h1>
 
@@ -37,7 +45,7 @@ const Pokedex = () => {
                     <div className="row">
                         <div className="col-7 col-sm-3">
                             <h5 className="text-center border border-1 mt-1">#{pokeToRender.id} {pokeToRender.name}</h5>
-                            <img className="card-img-top bg-light bg-opacity-75 rounded mb-1" src={pokeToRender.image} alt={pokeToRender.name} />
+                            <img className="card-img-top bg-light bg-opacity-75 rounded mb-1" src={pokeToRender.image} alt={pokeToRender.name} onLoad={handleLoad}/>
 
                         </div>
                         <div className="col-12 col-sm-9">
@@ -53,6 +61,7 @@ const Pokedex = () => {
                             <p>HT: {pokeToRender.height}</p>
                             <p>WT: {pokeToRender.weight}</p>
                             <p className="border border-1 d-block ps-1 py-1 rounded">{pokeToRender.description}</p>
+                            <FavButton poke={store.pokeNames.filter(data => data.name == poke)[0]} />
                         </div>
                     </div>
                     : <div className="d-flex justify-content-center align-items-center" style={{height:"100vh"}}>

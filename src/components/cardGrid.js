@@ -20,7 +20,7 @@ const CardGrid = ({name, image, getPokeInfo}) => {
             {
                 loadingImg && <Spinner animation="border" role="status"><span className="visually-hidden">Loading...</span></Spinner>
             }
-            <Link to={`/pokedex/${name}`} onClick={() => getPokeInfo(name)} style={{display: loadingImg ? "none" : "block", textDecoration: "none"}}>
+            <Link to={`/pokedex/${name}`} onClick={() => getPokeInfo(name)} className={loadingImg ? "d-none text-decoration-none" : "d-block text-decoration-none"}>
                 <div className="card" style={{width: "18rem"}}>
                     <h5 className="card-header">{name}</h5>
                     <div className="card-body">
