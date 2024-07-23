@@ -6,7 +6,7 @@ import Pagination from 'react-bootstrap/Pagination';
 
 const PokePagination = () => {
     const { store, actions } = useContext(Context);
-    const totalPages = store.pokeNames.length / 30 | 0;
+    const totalPages = Math.ceil(store.pokeNames.length / 30);
     const currentPage = store.page;
     const navigate = useNavigate();
     
@@ -47,7 +47,8 @@ const PokePagination = () => {
 
     const handlePage = (page) => {
         actions.setPage(page);
-        navigate(`/pokegrid/${page}`)
+        navigate(`/pokegrid/${page}`);
+        console.log(page);
     };
 
     return (
@@ -55,8 +56,8 @@ const PokePagination = () => {
             <Pagination.First onClick={()=>handlePage(1)} />
             <Pagination.Prev onClick={()=>handlePage(store.page-1)} disabled={(store.page-1) <= 1}/>
             {renderPaginationItems()}
-            <Pagination.Next onClick={()=>handlePage(store.page+1)} disabled={(store.page+1) >= store.pokeNames.lenght/30 | 0}/>
-            <Pagination.Last onClick={()=>handlePage(store.pokeNames.length/30 | 0)}/>
+            <Pagination.Next onClick={()=>handlePage(store.page+1)} disabled={(store.page+1) >= store.pokeNames.length/30 | 0}/>
+            <Pagination.Last onClick={()=>handlePage((store.pokeNames.length/30 | 0)+1)}/>
         </Pagination>
     )
 };
