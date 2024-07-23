@@ -28,7 +28,7 @@ const Pokedex = () => {
             
             <div className="d-flex">
             <BackButton/>
-            <h1 className="m-auto">Pokédex Information</h1>
+            <h1 className="m-auto text-decoration-underline">Pokédex Information</h1>
 
             </div>
                 {
