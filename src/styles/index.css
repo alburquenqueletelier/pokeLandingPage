@@ -102,3 +102,31 @@ code {
     background-color: #00ffff; 
   }
 }
+
+.image-container {
+  position: relative; /* Necesario para el posicionamiento absoluto de la imagen */
+  overflow: hidden; /* Oculta la imagen original mientras se carga la versión de baja resolución */
+}
+
+.pokemon-image {
+  width: 100%; /* Ajusta el ancho según tus necesidades */
+  height: auto; /* Ajusta la altura automáticamente */
+  opacity: 0; /* Inicialmente oculta la imagen */
+  transition: opacity 0.3s ease-in-out; /* Transición para la opacidad */
+}
+
+.fade-in-enter {
+  opacity: 0; /* Opacidad inicial para la animación */
+}
+
+.fade-in-enter-active {
+  opacity: 1; /* Opacidad final para la animación */
+}
+
+.fade-in-exit {
+  opacity: 1; /* Opacidad inicial para la animación de salida */
+}
+
+.fade-in-exit-active {
+  opacity: 0; /* Opacidad final para la animación de salida */
+}
