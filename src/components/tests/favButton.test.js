@@ -13,7 +13,7 @@ const renderWithContext = (component, { contextValue }) => {
 };
 
 describe("FavButton", () => {
-  const poke = { name: "pikachu", url: "https://pokeapi.co/api/v2/pokemon/pikachu/" };
+  const poke = { name: "pikachu", url: "/api/pokemon/pikachu/" };
 
   test("Add pokemon to favorites", () => {
     const contextValue = {

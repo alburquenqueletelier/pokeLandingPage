@@ -12,7 +12,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 		actions: {
             getPokeNames: () => {
 				console.log("getPokeNames start");
-                fetch("https://pokeapi.co/api/v2/pokemon?offset=0&limit=2000")
+                fetch("/api/pokemon?offset=0&limit=2000")
                 .then(response => response.json())
                 .then(data=>{
                     setStore({pokeNames: data.results})
@@ -27,12 +27,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log("Poke already in system");
 				} else {
 					console.log("getPokeInfo start");
-					fetch(`https://pokeapi.co/api/v2/pokemon/${poke}`)
+					fetch(`/api/pokemon/${poke}`)
 					.then(response => response.json())
 					.then(pokeFetched=>{
 						let splitUrl = pokeFetched.species.url.split("/");
     					let speciesId = splitUrl[splitUrl.length -2]
-						fetch(`https://pokeapi.co/api/v2/pokemon-species/${speciesId}`)
+						fetch(`/api/pokemon-species/${speciesId}`)
 						.then(response => response.json())
 						.then(speciesInfo => {
 							let info = {
